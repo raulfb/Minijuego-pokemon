@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/jpg" href="pokemon.jpg">
+    <meta charset="UTF-8">
+    <title>Pokemon</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <h1>Combate Pokemon</h1>
+    <div id="app">
+
+       
+        <!-- Casilla del jugador 1 -->
+        <div :class="['box', { winner: player1.winner }]">
+            <select v-model="player1.pokemon" @change="resetWinner">
+                <option v-for="pokemon in pokemons" v-bind:value="pokemon">{{ pokemon.name }}</option>
+            </select>
+            <pokemon :class="player1.pokemon.name"></pokemon>
+            <p>{{ player1.pokemon.name }} </p>
+        </div>
+
+        <!-- Espacio para el combate -->
+        <label>VS</label>
+
+        <!-- Casilla del jugador 2 -->
+        <div :class="['box', { winner: player2.winner }]">
+            <pokemon :class="player2.pokemon.name"></pokemon>
+            <select v-model="player2.pokemon" @change="resetWinner">
+                <option v-for="pokemon in pokemons" v-bind:value="pokemon">{{ pokemon.name }}</option>
+            </select>
+            <p> {{ player2.pokemon.name }} </p>
+        </div>
+        
+        <!-- Botones de luchar y reset -->
+        <div class="actions-container">
+                <button @click="fight">Luchar</button>
+                <button @click="resetWinner">Reset</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
